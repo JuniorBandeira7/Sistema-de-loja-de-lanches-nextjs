@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Models
+model User {
+  id          Int    @id @default(autoincrement())
+  email       String @unique
+  name        String
+  password    String
+  acquisitions Acquisition[]
+  cupons UserCupom[]
+}
+
+model Acquisition {
+  id         Int      @id @default(autoincrement())
+  finished   Boolean
+  price      Decimal  @db.Decimal(9, 2)
+  date       DateTime @default(now())
+  userId Int
+  user       User     @relation(fields: [userId], references: [id])
+  drinks      AcquisitionDrink[]
+  hamburguers AcquisitionHamburguer[]
+  combos      AcquisitionCombo[]
+}
+
+model Cupom {
+  id        Int      @id @default(autoincrement())
+  discount  Decimal  @db.Decimal(9, 2)
+  code      String
+  users UserCupom[]
+}
+
+model Hamburguer {
+  id          Int      @id @default(autoincrement())
+  name        String
+  price       Decimal  @db.Decimal(9, 2)
+  combos      ComboHamburguer[]
+  acquisitions AcquisitionHamburguer[]
+}
+
+model Drink {
+  id          Int      @id @default(autoincrement())
+  name        String
+  price       Decimal  @db.Decimal(9, 2)
+  combos      ComboDrink[]
+  acquisitions AcquisitionDrink[]
+}
+
+model Combo {
+  id          Int     @id @default(autoincrement())
+  name        String
+  price       Decimal @db.Decimal(9, 2)
+  hamburguers ComboHamburguer[]
+  drinks      ComboDrink[]
+  acquisitions AcquisitionCombo[]
+}
+
+model ComboHamburguer {
+  id           Int @id @default(autoincrement())
+  comboId      Int
+  hamburguerId Int
+  qtd          Int @default(1)
+
+  combo      Combo      @relation(fields: [comboId], references: [id])
+  hamburguer Hamburguer @relation(fields: [hamburguerId], references: [id])
+
+  @@unique([comboId, hamburguerId])
+}
+
+model ComboDrink {
+  id           Int @id @default(autoincrement())
+  comboId      Int
+  drinkId       Int
+  qtd          Int @default(1)
+
+  combo      Combo      @relation(fields: [comboId], references: [id])
+  drink      Drink      @relation(fields: [drinkId], references: [id])
+
+  @@unique([comboId, drinkId])
+}
+
+model AcquisitionDrink {
+  id            Int @id @default(autoincrement())
+  acquisitionId Int
+  drinkId       Int
+  qtd           Int @default(1)
+
+  acquisition Acquisition @relation(fields: [acquisitionId], references: [id])
+  drink      Drink      @relation(fields: [drinkId], references: [id])
+
+  @@unique([acquisitionId, drinkId])
+}
+
+model AcquisitionCombo {
+    id            Int @id @default(autoincrement())
+    acquisitionId Int
+    comboId       Int
+    qtd           Int @default(1)
+  
+    acquisition Acquisition @relation(fields: [acquisitionId], references: [id])
+    combo      Combo      @relation(fields: [comboId], references: [id])
+  
+    @@unique([acquisitionId, comboId])
+}
+
+model AcquisitionHamburguer {
+    id            Int @id @default(autoincrement())
+    acquisitionId Int
+    hamburguerId       Int
+    qtd           Int @default(1)
+  
+    acquisition Acquisition @relation(fields: [acquisitionId], references: [id])
+    hamburguer      Hamburguer      @relation(fields: [hamburguerId], references: [id])
+  
+    @@unique([acquisitionId, hamburguerId])
+}
+
+model UserCupom {
+    id            Int @id @default(autoincrement())
+    userId        Int
+    cupomId       Int
+    qtd           Int @default(1)
+  
+    user       User       @relation(fields: [userId], references: [id])
+    cupom      Cupom      @relation(fields: [cupomId], references: [id])
+  
+    @@unique([userId, cupomId])
+}
