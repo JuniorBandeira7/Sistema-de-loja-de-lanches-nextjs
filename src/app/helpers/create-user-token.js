@@ -7,7 +7,7 @@ const createUserToken = async (user) => {
             id: user.id,
             admin: user.admin
         },
-        env("secret")
+        process.env.SECRET
     )
     return token
 }

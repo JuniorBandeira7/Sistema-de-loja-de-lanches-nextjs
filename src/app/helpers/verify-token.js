@@ -15,7 +15,7 @@ const checkToken = async (req, res, next) => {
     }
 
     try {
-        const verified = jwt.verify(token, env('secret'))
+        const verified = jwt.verify(token, process.env.SECRET)
         req.user = verified
 
         const user = await prisma.user.findUnique({

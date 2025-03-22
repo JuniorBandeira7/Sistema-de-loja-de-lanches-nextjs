@@ -7,7 +7,7 @@ const getUserByToken = async (token) => {
     }
 
     try {
-        const decoded = jwt.verify(token, env('secret'))
+        const decoded = jwt.verify(token, process.env.SECRET)
         const userId = decoded.id
 
         const user = await prisma.user.findUnique({
