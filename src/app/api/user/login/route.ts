@@ -6,25 +6,17 @@ import prisma from "@db/db"
 
 // helpers
 const createUserToken = require('../../../helpers/create-user-token')
+const isTheFieldEmpty = require('../../../helpers/is-the-field-empty')
 
 export async function POST(req: Request){
     const {email, password} = await req.json()
 
     // validações
-    if(!email){
+    const [isEmpty, message] = isTheFieldEmpty({email, password}, ["email", "password"])
+    if (isEmpty){
         return NextResponse.json(
             {
-                message: 'Digite o email'
-            },
-            {
-                status: 422
-            }
-        )
-    }
-    if(!password){
-        return NextResponse.json(
-            {
-                message: 'Digite a password'
+                message: message
             },
             {
                 status: 422

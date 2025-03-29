@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs'
 // helpers
 const getUserByToken = require('../../../helpers/get-user-by-token')
 const getToken = require('../../../helpers/get-token')
+const isTheFieldEmpty = require('../../../helpers/is-the-field-empty')
 
 // GetUserById
 export async function GET(req: Request, { params }: { params: { id: string}}){
@@ -97,24 +98,14 @@ export async function DELETE(req: Request, { params }: { params: { id: string}})
 // updateUserById
 export async function PATCH(req: Request, { params }: { params: { id: string}}){
     const { id } = await params;
-
     const { name, email, password } = await req.json()
 
     // Validações
-    if(!name){
+    const [isEmpty, message] = isTheFieldEmpty({ name, email }, ["name", "email"])
+    if (isEmpty){
         return NextResponse.json(
             {
-                message: 'o nome é obrigatório'
-            },
-            {
-                status: 422
-            }
-        )
-    }
-    if(!email){
-        return NextResponse.json(
-            {
-                message: 'O email é obrigatório'
+                message: message
             },
             {
                 status: 422
