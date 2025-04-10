@@ -7,7 +7,7 @@ import prisma from '@db/db'
 // helpers
 const createUserToken = require('../../helpers/create-user-token')
 const isTheFieldEmpty = require('../../helpers/is-the-field-empty')
-
+// Criar usuário
 export async function POST(req: Request){
     const {name, email, password} = await req.json()
 
