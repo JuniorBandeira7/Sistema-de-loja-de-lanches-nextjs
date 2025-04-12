@@ -93,46 +93,36 @@ model ComboDrink {
 }
 
 model AcquisitionDrink {
-  id            Int @id @default(autoincrement())
-  acquisitionId Int
-  drinkId       Int
-  qtd           Int @default(1)
+    id            Int @id @default(autoincrement())
+    acquisitionId Int
+    drinkId       Int
 
-  acquisition Acquisition @relation(fields: [acquisitionId], references: [id])
-  drink      Drink      @relation(fields: [drinkId], references: [id])
-
-  @@unique([acquisitionId, drinkId])
+    acquisition Acquisition @relation(fields: [acquisitionId], references: [id])
+    drink      Drink      @relation(fields: [drinkId], references: [id])
 }
 
 model AcquisitionCombo {
     id            Int @id @default(autoincrement())
     acquisitionId Int
     comboId       Int
-    qtd           Int @default(1)
   
     acquisition Acquisition @relation(fields: [acquisitionId], references: [id])
     combo      Combo      @relation(fields: [comboId], references: [id])
-  
-    @@unique([acquisitionId, comboId])
 }
 
 model AcquisitionHamburguer {
     id            Int @id @default(autoincrement())
     acquisitionId Int
     hamburguerId       Int
-    qtd           Int @default(1)
   
     acquisition Acquisition @relation(fields: [acquisitionId], references: [id])
     hamburguer      Hamburguer      @relation(fields: [hamburguerId], references: [id])
-  
-    @@unique([acquisitionId, hamburguerId])
 }
 
 model UserCupom {
     id            Int @id @default(autoincrement())
     userId        Int
     cupomId       Int
-    qtd           Int @default(1)
   
     user       User       @relation(fields: [userId], references: [id])
     cupom      Cupom      @relation(fields: [cupomId], references: [id])
