@@ -4,6 +4,7 @@ CREATE TABLE `User` (
     `email` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
+    `admin` BOOLEAN NOT NULL,
 
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
@@ -83,9 +84,7 @@ CREATE TABLE `AcquisitionDrink` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `acquisitionId` INTEGER NOT NULL,
     `drinkId` INTEGER NOT NULL,
-    `qtd` INTEGER NOT NULL DEFAULT 1,
 
-    UNIQUE INDEX `AcquisitionDrink_acquisitionId_drinkId_key`(`acquisitionId`, `drinkId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -94,9 +93,7 @@ CREATE TABLE `AcquisitionCombo` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `acquisitionId` INTEGER NOT NULL,
     `comboId` INTEGER NOT NULL,
-    `qtd` INTEGER NOT NULL DEFAULT 1,
 
-    UNIQUE INDEX `AcquisitionCombo_acquisitionId_comboId_key`(`acquisitionId`, `comboId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -105,9 +102,7 @@ CREATE TABLE `AcquisitionHamburguer` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `acquisitionId` INTEGER NOT NULL,
     `hamburguerId` INTEGER NOT NULL,
-    `qtd` INTEGER NOT NULL DEFAULT 1,
 
-    UNIQUE INDEX `AcquisitionHamburguer_acquisitionId_hamburguerId_key`(`acquisitionId`, `hamburguerId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -116,7 +111,6 @@ CREATE TABLE `UserCupom` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `cupomId` INTEGER NOT NULL,
-    `qtd` INTEGER NOT NULL DEFAULT 1,
 
     UNIQUE INDEX `UserCupom_userId_cupomId_key`(`userId`, `cupomId`),
     PRIMARY KEY (`id`)
