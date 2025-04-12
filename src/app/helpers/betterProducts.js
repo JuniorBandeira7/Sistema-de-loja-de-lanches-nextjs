@@ -32,7 +32,7 @@ const betterProducts = async () => {
             if(countedAcquisitions.some(a => a.hamburguerId === acquisition.hamburguerId)) {
                 countAcquisitions.forEach((countAcquisition) => {
                     if(countAcquisition.id == acquisition.hamburguerId && countAcquisition.type === "hamburguer") {
-                        countAcquisition.qtd = acquisition.qtd + 1
+                        countAcquisition.qtd = countAcquisition.qtd + 1
                     }
                 })
             } else {
@@ -43,7 +43,7 @@ const betterProducts = async () => {
             if(countedAcquisitions.some(a => a.comboId === acquisition.comboId)) {
                 countAcquisitions.forEach((countAcquisition) => {
                     if(countAcquisition.id == acquisition.comboId && countAcquisition.type === "combo") {
-                        countAcquisition.qtd = acquisition.qtd + 1
+                        countAcquisition.qtd = countAcquisition.qtd + 1
                     }
                 })
             } else {
@@ -55,5 +55,7 @@ const betterProducts = async () => {
 
     return countAcquisitions
 }
+
+// falta organizar as ocorrencias por quantidade
 
 module.exports = betterProducts
