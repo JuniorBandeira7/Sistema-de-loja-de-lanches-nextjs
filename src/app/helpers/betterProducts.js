@@ -57,6 +57,4 @@ const betterProducts = async () => {
     return countAcquisitions.sort((a, b) => b.qtd - a.qtd)
 }
 
-// falta organizar as ocorrencias por quantidade
-
 module.exports = betterProducts
