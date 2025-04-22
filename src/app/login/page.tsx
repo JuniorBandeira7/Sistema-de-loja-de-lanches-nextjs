@@ -1,5 +1,4 @@
 import Button from "../components/Button";
-import Link from 'next/link';
 
 export default function Login() {
   return (
@@ -15,12 +14,12 @@ export default function Login() {
                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Senha</label>
                     <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
                 </div>
-                    <a href="#" className="ms-auto text-sm text-blue-700 hover:underline">Esqueceu a senha?</a>
+                    <a href="/" className="ms-auto text-sm text-blue-700 hover:underline">Esqueceu a senha?</a>
                 <Button className="w-full">
                     Logar
                 </Button>
                 <div className="text-sm font-medium text-gray-500">
-                    Novo aqui? <a href="#" className="text-blue-700 hover:underline">Registrar</a>
+                    Novo aqui? <a href="/" className="text-blue-700 hover:underline">Registrar</a>
                 </div>
             </form>
         </div>  
