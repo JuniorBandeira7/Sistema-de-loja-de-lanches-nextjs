@@ -2,14 +2,14 @@ import React from "react"
 
 const Header = () => {
     return(
-        <header>
-            <nav className="p-4 flex flex-row bg-three justify-center">
-                <nav className="flex justify-around w-[70%]">
+        <header className="fixed w-full opacity-75 z-40">
+            <nav className="p-6 flex flex-row bg-three justify-center">
+                <div className="flex justify-around w-[70%]">
                     <a href="">Início</a>
                     <a href="">Promoções</a>
                     <a href="">Pedidos</a>
                     <a href="">Perfil</a>
-                </nav>
+                </div>
             </nav>
         </header>
     )
