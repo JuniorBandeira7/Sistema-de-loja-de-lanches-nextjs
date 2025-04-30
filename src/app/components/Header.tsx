@@ -2,7 +2,7 @@ import React from "react"
 
 const Header = () => {
     return(
-        <header className="fixed w-full opacity-75 z-40">
+        <header className="fixed w-full opacity-95 z-40">
             <nav className="p-6 flex flex-row bg-three justify-center">
                 <div className="flex justify-around w-[70%]">
                     <a href="">Início</a>
